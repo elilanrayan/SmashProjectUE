@@ -22,6 +22,7 @@ public:
 private:
 	void FindPlayerStartInArena(TArray<AArenaPlayerStart*>& ResultsActors);
 	TSubclassOf<ASmashCharacter> GetSmashCharacterClassFromInputType(EAutoReceiveInput::Type InputType) const;
+	void SpawnCharacter(const TArray<AArenaPlayerStart*>& SpawnPoints);
 
 protected:
 	UPROPERTY(EditAnywhere)
@@ -35,4 +36,7 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<ASmashCharacter> SmashCharacterClassP3;
+
+	UPROPERTY(EditAnywhere)
+	TArray<ASmashCharacter*> CharactersInsideArena;
 };
