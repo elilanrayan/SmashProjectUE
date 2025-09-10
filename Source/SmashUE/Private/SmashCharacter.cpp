@@ -3,6 +3,8 @@
 
 #include "SmashCharacter.h"
 
+#include "Character/SmashCharacterStateMachine.h"
+
 // Sets default values
 ASmashCharacter::ASmashCharacter()
 {
@@ -23,6 +25,7 @@ void ASmashCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	RotateMeshUsingOrientX();
+	CreateStateMachine();
 	
 }
 
@@ -48,6 +51,11 @@ void ASmashCharacter::RotateMeshUsingOrientX() const
 	FRotator Rotation =GetMesh()->GetRelativeRotation();
 	Rotation.Yaw = -90.f * OrientX;
 	GetMesh()->SetRelativeRotation(Rotation);
+}
+
+void ASmashCharacter::CreateStateMachine()
+{
+	StateMachine = NewObject<USmashCharacterStateMachine>(this);
 }
 
 
