@@ -50,6 +50,7 @@ public :
 
 public:
 	void CreateStateMachine();
+	void InitStateMachine();
 
 protected:
 	UPROPERTY(EditAnywhere)

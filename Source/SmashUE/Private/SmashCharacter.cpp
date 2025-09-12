@@ -17,7 +17,8 @@ ASmashCharacter::ASmashCharacter()
 void ASmashCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	CreateStateMachine();
+	InitStateMachine();
 }
 
 // Called every frame
@@ -25,7 +26,7 @@ void ASmashCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	RotateMeshUsingOrientX();
-	CreateStateMachine();
+	
 	
 }
 
@@ -56,6 +57,12 @@ void ASmashCharacter::RotateMeshUsingOrientX() const
 void ASmashCharacter::CreateStateMachine()
 {
 	StateMachine = NewObject<USmashCharacterStateMachine>(this);
+}
+
+void ASmashCharacter::InitStateMachine()
+{
+	if (StateMachine == nullptr) return;
+	StateMachine->Init(this); 
 }
 
 
