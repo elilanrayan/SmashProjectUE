@@ -21,6 +21,18 @@ ESmashCharacterStateID USmashCharacterStateIdle::GetStateID()
 	return ESmashCharacterStateID::Idle;
 }
 
+void USmashCharacterStateIdle::StateEnter(ESmashCharacterStateID PreviousStateID)
+{
+	Super::StateEnter(PreviousStateID);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Enter StateIdle");
+}
+
+void USmashCharacterStateIdle::StateExit(ESmashCharacterStateID NextStateID)
+{
+	Super::StateExit(NextStateID);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Yellow , "Exit StateIdle");
+}
+
 
 // Called when the game starts
 void USmashCharacterStateIdle::BeginPlay()

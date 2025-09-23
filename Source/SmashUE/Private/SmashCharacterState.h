@@ -19,7 +19,12 @@ public:
 	USmashCharacterState();
 
 	virtual ESmashCharacterStateID GetStateID();
+	
 	virtual void StateInit(USmashCharacterStateMachine* InState);
+
+	virtual void StateEnter(ESmashCharacterStateID PreviousStateID);
+	
+	virtual void StateExit(ESmashCharacterStateID NextStateID);
 
 	protected:
 	UPROPERTY()

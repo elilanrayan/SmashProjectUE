@@ -3,6 +3,7 @@
 
 #include "Character/SmashCharacterStateMachine.h"
 
+#include "HeadMountedDisplayTypes.h"
 #include "SmashCharacter.h"
 #include "SmashCharacterState.h"
 #include "Character/SmashCharacterStateID.h"
@@ -12,11 +13,45 @@ void USmashCharacterStateMachine::Init(ASmashCharacter* InCharacter)
 	Character = InCharacter;
 	FindStates();
 	InitStates();
+
+	ChangeState(ESmashCharacterStateID::Idle);
 }
 
 ASmashCharacter* USmashCharacterStateMachine::GetCharacter() const
 {
 	return Character;
+}
+
+void USmashCharacterStateMachine::ChangeState(ESmashCharacterStateID NextStateID)
+{
+	USmashCharacterState* NextState = GetState(NextStateID);
+	//Do Nothing if NextState not found
+	if (NextState==nullptr) return;
+	if (CurrentState != nullptr)
+	{
+		CurrentState -> StateExit(NextStateID);
+	}
+
+	ESmashCharacterStateID PreviousStateID = CurrentStateID;
+	CurrentStateID = NextStateID;
+	CurrentState = NextState;
+
+	if (CurrentState != nullptr)
+	{
+		CurrentState -> StateEnter(PreviousStateID);
+	}
+}
+
+USmashCharacterState* USmashCharacterStateMachine::GetState(ESmashCharacterStateID StateID)
+{
+	for (USmashCharacterState* State : AllStates)
+	{
+		if (StateID == State->GetStateID())
+		{
+			return State;
+		}
+	}
+	return nullptr;
 }
 
 void USmashCharacterStateMachine::FindStates()

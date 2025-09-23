@@ -34,9 +34,9 @@ void AMatchGameMode::BeginPlay()
 		EAutoReceiveInput::Type InputType = PlayerStartActor->AutoReceiveInput.GetValue();
 		TSubclassOf<ASmashCharacter> SmashCharacterClass = GetSmashCharacterClassFromInputType(InputType);
 		if (SmashCharacterClass == nullptr) continue;
-		GEngine->AddOnScreenDebugMessage(-1,3.f,FColor::Red,SmashCharacterClass->GetFName().ToString());
+		//GEngine->AddOnScreenDebugMessage(-1,3.f,FColor::Red,SmashCharacterClass->GetFName().ToString());
 		
-		GEngine->AddOnScreenDebugMessage(-1,3.f,FColor::Red,PlayerStartActor->GetFName().ToString());
+		//GEngine->AddOnScreenDebugMessage(-1,3.f,FColor::Red,PlayerStartActor->GetFName().ToString());
 	}
 }
 

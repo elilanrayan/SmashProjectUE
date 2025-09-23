@@ -16,6 +16,10 @@ public:
 	// Sets default values for this component's properties
 	USmashCharacterStateIdle();
 	virtual ESmashCharacterStateID GetStateID() override;
+	virtual void StateEnter(ESmashCharacterStateID PreviousStateID) override;
+	
+	virtual void StateExit(ESmashCharacterStateID NextStateID) override;
+
 	
 
 protected:
