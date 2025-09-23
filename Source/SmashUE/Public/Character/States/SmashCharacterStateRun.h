@@ -4,26 +4,28 @@
 
 #include "CoreMinimal.h"
 #include "SmashCharacterState.h"
-#include "SmashCharacterStateIdle.generated.h"
+#include "SmashCharacterStateRun.generated.h"
 
-class ASmashCharacter;
-UCLASS(ClassGroup=(SmashCharacterState), meta=(BlueprintSpawnableComponent))
-class SMASHUE_API USmashCharacterStateIdle : public USmashCharacterState
+
+UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
+class SMASHUE_API USmashCharacterStateRun : public USmashCharacterState
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this component's properties
-	USmashCharacterStateIdle();
-	virtual ESmashCharacterStateID GetStateID() override;
+	USmashCharacterStateRun();
+	virtual  ESmashCharacterStateID GetStateID() override;
 	virtual void StateEnter(ESmashCharacterStateID PreviousStateID) override;
-	
 	virtual void StateExit(ESmashCharacterStateID NextStateID) override;
-
 	virtual void StateTick(float Deltatime) override;
 
 	UPROPERTY(EditAnywhere)
-	TObjectPtr<UAnimMontage> AnimMontageIdle;
+	TObjectPtr<UAnimMontage> AnimMontageRun;
+
+	UPROPERTY(EditAnywhere)
+	float MaxRunSpeed;
+
 
 protected:
 	// Called when the game starts

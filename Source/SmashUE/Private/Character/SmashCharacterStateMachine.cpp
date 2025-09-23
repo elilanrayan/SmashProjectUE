@@ -22,6 +22,12 @@ ASmashCharacter* USmashCharacterStateMachine::GetCharacter() const
 	return Character;
 }
 
+void USmashCharacterStateMachine::Tick(float DeltaTime)
+{
+	if (CurrentState == nullptr) return;
+	CurrentState->StateTick(DeltaTime);
+}
+
 void USmashCharacterStateMachine::ChangeState(ESmashCharacterStateID NextStateID)
 {
 	USmashCharacterState* NextState = GetState(NextStateID);

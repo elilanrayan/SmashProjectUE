@@ -26,6 +26,8 @@ public:
 	
 	virtual void StateExit(ESmashCharacterStateID NextStateID);
 
+	virtual void StateTick(float Deltatime);
+
 	protected:
 	UPROPERTY()
 	TObjectPtr<ASmashCharacter> Character;

@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "SmashCharacter.generated.h"
+class USmashCharacterInputData;
+class UInputMappingContext;
 class USmashCharacterStateMachine;
 UCLASS()
 
@@ -17,6 +19,9 @@ class SMASHUE_API ASmashCharacter : public ACharacter
 public:
 	// Sets default values for this character's properties
 	ASmashCharacter();
+	UPROPERTY(BlueprintReadWrite)
+	TObjectPtr<UAnimMontage> AnimMontage;
+	
 
 protected:
 	// Called when the game starts or when spawned
@@ -39,6 +44,8 @@ public :
 
 	void SetOrientX(float NewOrientX);
 
+	
+
 	protected :
 	UPROPERTY(BlueprintReadOnly)
 	float OrientX = 1.1f;
@@ -52,11 +59,26 @@ public:
 	void CreateStateMachine();
 	void InitStateMachine();
 
+	void TicketStateMachine(float DeltaTime) const;
+
 protected:
 	UPROPERTY(BlueprintReadOnly)
 	TObjectPtr<USmashCharacterStateMachine> StateMachine;
 
+	
 	#pragma endregion State Machine
+
+#pragma region Input Data / Mapping Context
+	public:
+	UPROPERTY()
+	TObjectPtr<UInputMappingContext> InputMappingContext;
+
+	UPROPERTY()
+	TObjectPtr<USmashCharacterInputData> InputData;
+
+	protected:
+	void SetupMappingContextIntoController() const;
+	#pragma endregion Input Data / Mapping Context
 };
 
 
