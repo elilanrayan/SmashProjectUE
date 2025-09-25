@@ -5,9 +5,13 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "SmashCharacter.generated.h"
+
+class UEnhancedInputComponent;
 class USmashCharacterInputData;
 class UInputMappingContext;
 class USmashCharacterStateMachine;
+struct FInputActionValue;
+
 UCLASS()
 
 class SMASHUE_API ASmashCharacter : public ACharacter
@@ -79,6 +83,22 @@ protected:
 	protected:
 	void SetupMappingContextIntoController() const;
 	#pragma endregion Input Data / Mapping Context
+
+#pragma region Input Move X
+	public:
+	float GetInputMoveX() const;
+
+	
+	
+
+protected :
+	UPROPERTY()
+	float InputMoveX = 0.0f;
+
+private :
+	void BindInputMoveXAxisAndActions(UEnhancedInputComponent* EnhancedInputComponent);
+	void OnInputMoveX(const FInputActionValue& InputActionValue);
+	#pragma endregion Input Move X
 };
 
 

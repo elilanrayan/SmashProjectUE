@@ -5,6 +5,7 @@
 
 #include "SmashCharacter.h"
 #include "Character/SmashCharacterStateID.h"
+#include "Character/SmashCharacterStateMachine.h"
 
 
 // Sets default values for this component's properties
@@ -39,6 +40,11 @@ void USmashCharacterStateIdle::StateTick(float Deltatime)
 {
 	Super::StateTick(Deltatime);
 	GEngine-> AddOnScreenDebugMessage(-1, 0.1f, FColor::Green , "Tick StateIdle");
+
+	if (FMath::Abs(Character->GetInputMoveX()) > 0.1f)
+	{
+		StateMachine->ChangeState(ESmashCharacterStateID::Walk);
+	}
 }
 
 

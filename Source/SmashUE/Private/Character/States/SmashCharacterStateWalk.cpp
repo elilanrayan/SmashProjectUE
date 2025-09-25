@@ -5,6 +5,7 @@
 
 #include "SmashCharacter.h"
 #include "Character/SmashCharacterStateID.h"
+#include "Character/SmashCharacterStateMachine.h"
 
 
 // Sets default values for this component's properties
@@ -43,6 +44,17 @@ void USmashCharacterStateWalk::StateTick(float Deltatime)
 	FVector MovementDirection = FVector(MaxWalkSpeed * Character-> GetOrientX() * Deltatime, 0, 0);
 	Character->AddMovementInput(MovementDirection);
 	GEngine->AddOnScreenDebugMessage(-1, 0.1f, FColor::Green, "Tick State Walk");
+
+	if (FMath::Abs(Character->GetInputMoveX()) < 0.1f)
+	{
+		StateMachine->ChangeState(ESmashCharacterStateID::Idle);
+	}
+	else
+	{
+		Character->SetOrientX(Character->GetInputMoveX());
+		Character->AddMovementInput(FVector::ForwardVector,Character->GetOrientX());
+	}
+	
 }
 
 
