@@ -8,6 +8,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "Character/SmashCharacterInputData.h"
 #include "EnhancedInputComponent.h"
+#include "Camera/CameraWorldSubsystem.h"
 // Sets default values
 ASmashCharacter::ASmashCharacter()
 {
@@ -22,6 +23,8 @@ void ASmashCharacter::BeginPlay()
 	Super::BeginPlay();
 	CreateStateMachine();
 	InitStateMachine();
+
+	GetWorld()->GetSubsystem<UCameraWorldSubsystem>()->AddFollowTarget(this);
 }
 
 // Called every frame
