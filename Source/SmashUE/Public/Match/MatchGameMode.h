@@ -29,6 +29,8 @@ private:
 	USmashCharacterInputData* LoadInputDataFromConfig();
 	
 	UInputMappingContext* LoadInputMappingContextFromConfig();
+
+	void CreateAndInitPlayers() const;
 	
 
 protected:

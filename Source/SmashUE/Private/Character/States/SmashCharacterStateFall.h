@@ -4,35 +4,44 @@
 
 #include "CoreMinimal.h"
 #include "SmashCharacterState.h"
-#include "SmashCharacterStateRun.generated.h"
+#include "SmashCharacterStateFall.generated.h"
 
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
-class SMASHUE_API USmashCharacterStateRun : public USmashCharacterState
+class SMASHUE_API USmashCharacterStateFall : public USmashCharacterState
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this component's properties
-	USmashCharacterStateRun();
-	virtual  ESmashCharacterStateID GetStateID() override;
-	virtual void StateEnter(ESmashCharacterStateID PreviousStateID) override;
-	virtual void StateExit(ESmashCharacterStateID NextStateID) override;
-	virtual void StateTick(float Deltatime) override;
+	USmashCharacterStateFall();
+
+	virtual ESmashCharacterStateID GetStateID() override;
 
 	UFUNCTION()
-	void OnInputJump(bool isJumping);
+	virtual void StateEnter(ESmashCharacterStateID PreviousStateID) override;
 
+	UFUNCTION()
+	virtual void StateExit(ESmashCharacterStateID NextStateID) override;
+
+	virtual void StateTick(float Deltatime) override;
 
 	UPROPERTY(EditAnywhere)
-	TObjectPtr<UAnimMontage> AnimMontageRun;
+	TObjectPtr<UAnimMontage> AnimMontageFall;
 
 	UPROPERTY(EditAnywhere)
-	float MaxRunSpeed;
+	float FallHorizontalMoveSpeed;
 
+	UPROPERTY(EditAnywhere)
+	float FallAirControl;
 
+	UPROPERTY(EditAnywhere)
+	float FallGravityScale;
 
+	UPROPERTY(EditAnywhere)
+	float FallFastGravityScale;
 
+	
 
 protected:
 	// Called when the game starts

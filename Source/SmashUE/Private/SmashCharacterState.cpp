@@ -3,6 +3,7 @@
 
 #include "SmashCharacterState.h"
 
+#include "SmashCharacter.h"
 #include "Character/SmashCharacterStateID.h"
 #include "Character/SmashCharacterStateMachine.h"
 
@@ -13,6 +14,7 @@ USmashCharacterState::USmashCharacterState()
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = false;
+	
 	
 }
 
@@ -25,6 +27,7 @@ void USmashCharacterState::StateInit(USmashCharacterStateMachine* InStateMachine
 {
 	StateMachine = InStateMachine;
 	Character = InStateMachine -> GetCharacter();
+	CharacterMovementComponent = Character->GetCharacterMovement();
 	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Blue, FString::Printf(TEXT("Init State %d"), GetStateID()));
 }
 

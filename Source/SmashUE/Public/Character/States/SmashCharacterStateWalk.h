@@ -16,7 +16,17 @@ public:
 	// Sets default values for this component's properties
 	USmashCharacterStateWalk();
 	virtual ESmashCharacterStateID GetStateID() override;
+
+	UFUNCTION()
 	virtual void StateEnter(ESmashCharacterStateID PreviousStateID) override;
+
+	UFUNCTION()
+	void OnInputMoveXFast(float InputMoveXFast);
+
+	UFUNCTION()
+	void OnInputJump(bool isJumping);
+
+	UFUNCTION()
 	virtual void StateExit(ESmashCharacterStateID NextStateID) override;
 
 	virtual void StateTick(float Deltatime) override;

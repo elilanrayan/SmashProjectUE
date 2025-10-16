@@ -103,6 +103,12 @@ float ASmashCharacter::GetInputMoveX() const
 	return InputMoveX;
 }
 
+void ASmashCharacter::OnInputMoveFastX(const FInputActionValue& InputActionValue)
+{
+	InputMoveX = InputActionValue.Get<float>();
+	InputMoveXFastEvent.Broadcast(InputMoveX);
+}
+
 void ASmashCharacter::BindInputMoveXAxisAndActions(UEnhancedInputComponent* EnhancedInputComponent)
 {
 	if (InputData == nullptr) return;
@@ -121,12 +127,38 @@ void ASmashCharacter::BindInputMoveXAxisAndActions(UEnhancedInputComponent* Enha
 				&ASmashCharacter::OnInputMoveX
 				);
 	}
+
+	if (InputData->InputActionMoveXFast)
+	{
+		EnhancedInputComponent->BindAction(
+			InputData->InputActionMoveXFast,
+			ETriggerEvent::Triggered,
+			this,
+			&ASmashCharacter::OnInputMoveFastX);
+	}
+
+	if (InputData->InputActionJump)
+	{
+		EnhancedInputComponent->BindAction(InputData->InputActionJump,ETriggerEvent::Started,this,&ASmashCharacter::OnInputJump);
+	}
 }
 
 void ASmashCharacter::OnInputMoveX(const FInputActionValue& InputActionValue)
 {
 	InputMoveX = InputActionValue.Get<float>();
 }
+
+bool ASmashCharacter::GetInputJump() const
+{
+	return isJumping;
+}
+
+void ASmashCharacter::OnInputJump(const FInputActionValue& InputActionValue)
+{
+	isJumping = true;
+	InputJumpEvent.Broadcast(isJumping);
+}
+
 
 
 
