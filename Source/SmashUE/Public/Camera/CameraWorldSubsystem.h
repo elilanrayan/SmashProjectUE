@@ -6,6 +6,7 @@
 #include "Subsystems/WorldSubsystem.h"
 #include "CameraWorldSubsystem.generated.h"
 
+class UCameraSettings;
 class UCameraComponent;
 /**
  * 
@@ -15,8 +16,13 @@ class SMASHUE_API UCameraWorldSubsystem : public UTickableWorldSubsystem
 {
 	GENERATED_BODY()
 
-public:
+
+
+
+	UPROPERTY()
+	const UCameraSettings* CameraSettings;
 #pragma region Subsystem Overrides
+public:
 	virtual void PostInitialize() override;
 
 	virtual void OnWorldBeginPlay(UWorld& InWorld) override;
@@ -77,19 +83,13 @@ protected:
 	#pragma endregion Bounds
 
 #pragma region Zoom
-	protected:
+private:
 	UPROPERTY()
 	float CameraZoomYMin = 0.f;
 
 	UPROPERTY()
 	float CameraZoomYMax = 0.f;
-
-	UPROPERTY()
-	float ZoomCameraDistanceBetweenTargetsMin = 300.f;
-
-	UPROPERTY()
-	float ZoomCameraDistanceBetweenTargetsMax = 1500.f;
-
+	
 	UFUNCTION()
 	void InitCameraZoomParameters();
 #pragma endregion Zoom
